@@ -1,0 +1,19 @@
+services:
+  menus-semaine:
+    image: ghcr.io/VOTRE_USERNAME/menus-semaine-maison:latest
+    container_name: menus-semaine
+    ports:
+      - "3010:3000"
+    volumes:
+      - ./data:/app/prisma/data
+    environment:
+      - DATABASE_URL=file:/app/prisma/data/dev.db
+      - AUTH_SECRET=${AUTH_SECRET}
+      - NEXTAUTH_URL=https://menus.beziau.dev
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.menus.rule=Host(`menus.beziau.dev`)"
+      - "traefik.http.routers.menus.entrypoints=websecure"
+      - "traefik.http.routers.menus.tls.certresolver=letsencrypt"
+      - "traefik.http.services.menus.loadbalancer.server.port=3000"

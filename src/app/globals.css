@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Custom pastel color palette */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Mint green */
+  --color-mint-50: #f0fdf9;
+  --color-mint-100: #c9f5e5;
+  --color-mint-200: #98ead0;
+  --color-mint-300: #5edbb4;
+  --color-mint-400: #2ec495;
+  --color-mint-500: #16a879;
+  --color-mint-600: #0f8763;
+  --color-mint-700: #0f6c52;
+
+  /* Sky blue */
+  --color-sky-50: #f0f9ff;
+  --color-sky-100: #d8f0fd;
+  --color-sky-200: #b8e4fc;
+  --color-sky-300: #87ceeb;
+  --color-sky-400: #53b4e0;
+  --color-sky-500: #2e9bd1;
+  --color-sky-600: #1f7db3;
+
+  /* Lemon yellow */
+  --color-lemon-50: #fffef5;
+  --color-lemon-100: #fffacd;
+  --color-lemon-200: #fff3a0;
+  --color-lemon-300: #ffea6b;
+  --color-lemon-400: #ffd93d;
+  --color-lemon-500: #f5c400;
+
+  /* Rose pink */
+  --color-rose-50: #fff1f2;
+  --color-rose-100: #ffe4e6;
+  --color-rose-200: #fecdd3;
+  --color-rose-300: #fda4af;
+
+  /* Fonts */
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Global styles */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-mint-400);
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-mint-50);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-mint-300);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-mint-400);
+}
+
+/* Textarea auto-resize helper */
+textarea {
+  field-sizing: content;
+  min-height: 2.5rem;
+  max-height: 8rem;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--color-mint-200);
+  color: var(--color-mint-700);
 }
