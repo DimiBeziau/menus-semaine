@@ -18,7 +18,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Set DATABASE_URL for Prisma generate (only needed at build time)
-ENV DATABASE_URL="file:./prisma/data/dev.db"
+ENV DATABASE_URL="file:/app/prisma/data/dev.db"
 
 # Generate Prisma client
 RUN npx prisma generate
@@ -37,6 +37,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
+# Install Prisma CLI for migrations at runtime
+RUN npm install -g prisma
+
 # Create data directory for SQLite
 RUN mkdir -p /app/prisma/data && chown -R nextjs:nodejs /app/prisma
 
@@ -48,6 +51,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/prisma ./prisma
 COPY --from=builder --chown=nextjs:nodejs /app/src/generated ./src/generated
 
+# Copy entrypoint script
+COPY --chown=nextjs:nodejs docker-entrypoint.sh ./
+RUN chmod +x docker-entrypoint.sh
+
 USER nextjs
 
 EXPOSE 3000
@@ -55,4 +62,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
-CMD ["node", "server.js"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
