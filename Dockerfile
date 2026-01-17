@@ -37,8 +37,8 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-# Install Prisma CLI for migrations at runtime
-RUN npm install -g prisma
+# Install Prisma CLI for migrations at runtime (same version as project)
+RUN npm install -g prisma@6
 
 # Create data directory for SQLite
 RUN mkdir -p /app/prisma/data && chown -R nextjs:nodejs /app/prisma
