@@ -2,7 +2,7 @@
 # Copy this file to the server
 
 services:
-  app:
+  menus-semaine:
     image: ghcr.io/VOTRE_USERNAME/menus-semaine-maison:latest
     container_name: menus-semaine
     ports:

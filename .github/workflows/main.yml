@@ -24,14 +24,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Generate Prisma Client
-        run: npx prisma generate
-
       - name: Generate .env file from secrets
         run: |
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
           echo "AUTH_SECRET=${{ secrets.AUTH_SECRET }}" >> .env
           echo "NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}" >> .env
+
+      - name: Generate Prisma Client
+        run: npx prisma generate
 
       - name: Build NextJS project
         run: npm run build
