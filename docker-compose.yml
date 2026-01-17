@@ -1,6 +1,6 @@
 services:
   menus-semaine:
-    image: ghcr.io/VOTRE_USERNAME/menus-semaine-maison:latest
+    image: ghcr.io/dimbeziau/menus-semaine:latest
     container_name: menus-semaine
     ports:
       - "3010:3000"
@@ -8,7 +8,8 @@ services:
       - ./data:/app/prisma/data
     environment:
       - DATABASE_URL=file:/app/prisma/data/dev.db
-      - AUTH_SECRET=${AUTH_SECRET}
+      - AUTH_SECRET=k7X9mPqR2vN8wL4jF6hT3bY5cA1eZ0sD
+      - AUTH_TRUST_HOST=true
       - NEXTAUTH_URL=https://menus.beziau.dev
     restart: unless-stopped
     labels:
